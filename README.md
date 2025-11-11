@@ -227,6 +227,3 @@ $$ A(BC) = \begin{bmatrix}
 \end{bmatrix} $$
 
 *Conclusión*: Por lo tanto, se verifica que $(AB)C = A(BC)$.
----
-
-

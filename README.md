@@ -171,6 +171,7 @@ $$G = \begin{pmatrix}
 2. Se multiplica cada elemento de la fila o columna seleccionada por el determinante de la matriz que resulta al eliminar la fila y columna del elemento seleccionado.
 
 **Paso 2:** Expandimos por la primera fila:
+
 $$\det(G) = 1 \cdot \begin{vmatrix}
 3 & 1 \\
 0 & 1
@@ -183,6 +184,7 @@ $$\det(G) = 1 \cdot \begin{vmatrix}
 \end{vmatrix}$$
 
 **Paso 3:** Calculamos los determinantes de las matrices 2x2 restantes:
+
 $$= 1 \cdot (3 \cdot 1 - 1 \cdot 0) + 2 \cdot (-1 \cdot 0 - 3 \cdot 2)$$
 $$= 1 \cdot 3 + 2 \cdot (-6) = 3 - 12 = -9$$
 
@@ -217,6 +219,7 @@ $$\det(A) = (2)(3) - (1)(1) = 6 - 1 = 5$$
 $$\det(B) = (1)(1) - (2)(3) = 1 - 6 = -5$$
 
 **Paso 2:** Calculamos $AB$:
+
 $$AB = \begin{pmatrix}
 2 & 1 \\
 1 & 3

@@ -7,7 +7,7 @@
 
 # Objetivo
 
-Familiarizarse con la clasificación y operaciones básicas de matrices, incluyendo suma, resta, multiplicación y transposición.
+Resolver ejercicios prácticos relacionados con el cálculo de determinantes de matrices de diferentes tamaños (2x2, 3x3, 4x4) utilizando diversos métodos, así como verificar propiedades y aplicaciones geométricas de los determinantes.
 
 ---
 

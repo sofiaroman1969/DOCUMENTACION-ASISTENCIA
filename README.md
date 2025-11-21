@@ -172,12 +172,12 @@ Y se obtendrá la mátriz multiplicada por un escalar.
 
 ## Transponer una matriz en Google Sheets
 
-Para transponer una matriz en Google Sheets, se usa la función `=TRANSPOSE()`. 
+Para transponer una matriz en Google Sheets, se usa la función `=TRANSPONER()`. 
 
 De acuerdo a como se llame tu hoja de cálculo en donde tienes tu primera matriz, por ejemplo: "Triangulo".
 
 ```
-=TRANSPONSE(Triangulo!A1:AD30)
+=TRANSPONER(Triangulo!A1:AD30)
 ```
 
 Y se obtendrá la matriz transpuesta.

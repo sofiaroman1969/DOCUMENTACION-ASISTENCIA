@@ -1,231 +1,194 @@
 # Tecnológico de Software
 ## Materia: Fundamentos de álgebra
 ## Alumno: Michelle Cámara González
-## Actividad #16.  Matrices documentación
+## Actividad #19.  Matrices excel documentación
 
 ---
 # Objetivo
-
-Familiarizarse con la clasificación y operaciones básicas de matrices, incluyendo suma, resta, multiplicación y transposición.
-
----
-
-## Índice
-- [Ejercicio 1: Clasificación de matrices](#ejercicio-1-clasificación-de-matrices)
-- [Ejercicio 2: Operaciones con matrices](#ejercicio-2-operaciones-con-matrices)
-- [Ejercicio 3: Multiplicación cadena](#ejercicio-3-multiplicación-cadena)
+Documentar el uso de matriz en Google Sheets, en donde se cree una imagen con dimensión 30x30 utilizando las herramientas de formato condicional y las funciones de Google Sheets.
 
 ---
 
-# Ejercicio 1: Clasificación de matrices
+# Desarrollo 
 
-## Objetivo del ejercicio: 
+Para crear una imagen utilizando matrices en Google Sheets, se pueden seguir los siguientes pasos:
 
-Identificar y clasificar diferentes tipos de matrices según sus propiedades.
+1. **Crear una nueva hoja de cálculo**: Abre Google Sheets y crea una nueva hoja de cálculo.
+
+2. **Definir el tamaño de la matriz**: Decide el tamaño de la matriz que deseas crear. En este caso, se utilizará una matriz de 30x30.
+
+3. **Llenar la matriz con datos**: Llena las celdas de la matriz con valores que representen los colores que deseas utilizar en la imagen. Por ejemplo, puedes usar números del 0 al 1 para representar diferentes tonos de gris. 
+
+```
+0 --> tonos blancos.
+1 --> tonos negros.
+```
+4. **Crear matriz de la imagen**: Para crear la matriz en escala de grises se utiliza el código preliminar en Python. El cual se va editar la variable ```ruta``` con el path de la imagen. 
+
+```Python
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+def imagen_a_grises_30x30(ruta_imagen: str) -> np.ndarray:
+    """
+    Lee una imagen, la convierte a escala de grises, la redimensiona a 30x30  y la normaliza a valores entre 0 y 1.
+    """
+
+    #Cargar imagen en escala de grises
+    img = cv2.imread(ruta_imagen, cv2.IMREAD_GRAYSCALE)
+
+    if img is None:
+        raise FileNotFoundError(f"No se pudo abrir la imagen: {ruta_imagen}")
+
+    print("Tamaño original:", img.shape)
+
+    # Redimensionar imagen
+    img_30 = cv2.resize(img, (30, 30), interpolation=cv2.INTER_AREA)
+    print("Tamaño redimensionado:", img_30.shape)
 
 
-### a) 
+    # Convertir a float y normalizar imagen
+    img_norm = 1- img_30.astype(np.float32) / 255.0
 
-$$A = \begin{bmatrix}
-1 & 0 \\
-0 & 1 
-\end{bmatrix}$$
+    return img_norm
 
-Es una matriz *identidad*, ya que su diagonal principal está compuesta por **unos** y los demás elementos son ceros. 
 
-### b) 
+def matriz_a_texto_comas(matriz: np.ndarray, decimales: int = 2) -> str:
+    filas_str = []
+    for fila in matriz:
+        valores = [f"{v:.{decimales}f}" for v in fila]
+        filas_str.append(",".join(valores))
+    return "\n".join(filas_str)
 
-$$ B = \begin{bmatrix}
-3 & 0 & 0 \\
-0 & -2 & 0 \\
-0 & 0 & 5 
-\end{bmatrix}  $$
 
-Es una matriz *diagonal*, ya que todos los elementos están compuestos por ceros **exceptuando** su diagonal principal.
+if __name__ == "__main__":
+    # Ruta de la imagen
+    ruta = "/content/images.jpg"
 
-### c)
+    # Obtener matriz 30x30 en escala de grises [0,1]
+    mat = imagen_a_grises_30x30(ruta)
 
-$$C = \begin{bmatrix}
-2 & 1 & 4 \\
-1 & 3 & 5 \\
-4 & 5 & 6 
-\end{bmatrix}  $$
+    print("Shape de la matriz:", mat.shape)
 
-Es una matriz *simétrica*, ya que $a_ij = a_ji$ es simétrica respecto a su diagonal principal.
+    #Matriz por comas
+    texto_comas = matriz_a_texto_comas(mat, decimales=2)
+    print("\nMatriz formateada con comas:")
+    print(texto_comas)
 
-### d)
+    with open("matriz_30x30.txt", "w", encoding="utf-8") as f:
+        f.write(texto_comas)
+    print("\nSe guardó la matriz en matriz_30x30.txt")
 
-$$ D = \begin{bmatrix}
-1 & 2 & 3 \\
-0 & 4 & 5 \\
-0 & 0 & 6 
-\end{bmatrix}  $$
+    
+#Muestra cómo se ve la imagen
+plt.imshow(mat, cmap='gray', vmin=0, vmax=1)
+plt.title("Imagen 30x30 en escala de grises (normalizada)")
+plt.show()
 
-Es una matriz *triangular superior*, ya que todos los elementos debajo de la diagonal principal son ceros.
+```
 
----
+5. **Cambiar el formato de las celdas**: 
+```
+Seleccionar columna A hasta la columna AD (30 columnas). --> Cambiar tamaño el tamaño de las columnas a 20. --> Seleccionar fila 1 hasta la fila 30 (30 filas). --> Cambiar el tamaño de las filas a 20.
+```
 
-# Ejercicio 2: Operaciones con matrices
+6. **Aplicar formato condicional**: 
+```
+Seleccionar el rango de A1:AD30 --> Formato --> Formato condicional --> Punto mínimo: 0 --> Color blanco. --> Punto máximo: 1 --> Color de tu elección. --> Listo.
+```
 
-## Objetivo del ejercicio:
+7. **Ingresar los datos en la matriz**: Copia y pega los datos generados por el código Python en el rango A1:AD30 de tu hoja de cálculo de Google Sheets.
 
-Realizar operaciones básicas con matrices, incluyendo suma, resta, multiplicación y transposición.
 
-Dadas las matrices:
+| A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | AA | AB | AC | AD |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
+|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
+|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
+|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
+|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
+|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
+|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0.2|0.2|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
+|0|0|0|0|0|0|0|0|0|0|0|0|0|0.2|0.3|0.2|0.2|0|0|0|0|0|0|0|0|0|0|0|0|0|
+|0|0|0|0|0|0|0|0|0|0|0|0|0.2|0.3|0.4|0.3|0.2|0.2|0|0|0|0|0|0|0|0|0|0|0|0|
+|0|0|0|0|0|0|0|0|0|0|0|0.2|0.3|0.4|0.5|0.4|0.3|0.2|0.2|0|0|0|0|0|0|0|0|0|0|0|
+|0|0|0|0|0|0|0|0|0|0|0.2|0.3|0.4|0.5|0.6|0.5|0.4|0.3|0.2|0.2|0|0|0|0|0|0|0|0|0|0|
+|0|0|0|0|0|0|0|0|0|0.2|0.3|0.4|0.5|0.6|0.7|0.6|0.5|0.4|0.3|0.2|0.2|0|0|0|0|0|0|0|0|0|
+|0|0|0|0|0|0|0|0|0.2|0.3|0.4|0.5|0.6|0.7|0.8|0.7|0.6|0.5|0.4|0.3|0.2|0.2|0|0|0|0|0|0|0|0|
+|0|0|0|0|0|0|0|0.2|0.3|0.4|0.5|0.6|0.7|0.8|0.9|0.8|0.7|0.6|0.5|0.4|0.3|0.2|0.2|0|0|0|0|0|0|0|
+|0|0|0|0|0|0|0.2|0.3|0.4|0.5|0.6|0.7|0.8|0.9|1|0.9|0.8|0.7|0.6|0.5|0.4|0.3|0.2|0.2|0|0|0|0|0|0|
+|0|0|0|0|0|0.2|0.3|0.4|0.5|0.6|0.7|0.8|0.9|1|1|1|0.9|0.8|0.7|0.6|0.5|0.4|0.3|0.2|0.2|0|0|0|0|0|
+|0|0|0|0|0.2|0.3|0.4|0.5|0.6|0.7|0.8|0.9|1|1|1|1|1|0.9|0.8|0.7|0.6|0.5|0.4|0.3|0.2|0.2|0|0|0|0|
+|0|0|0|0.2|0.3|0.4|0.5|0.6|0.7|0.8|0.9|1|1|1|1|1|1|1|0.9|0.8|0.7|0.6|0.5|0.4|0.3|0.2|0.2|0|0|0|
+|0|0|0.2|0.3|0.4|0.5|0.6|0.7|0.8|0.9|1|1|1|1|1|1|1|1|1|0.9|0.8|0.7|0.6|0.5|0.4|0.3|0.2|0.2|0|0|
+|0|0.2|0.3|0.4|0.5|0.6|0.7|0.8|0.9|1|1|1|1|1|1|1|1|1|1|1|0.9|0.8|0.7|0.6|0.5|0.4|0.3|0.2|0.2|0|
+|0.2|0.3|0.4|0.5|0.6|0.7|0.8|0.9|1|1|1|1|1|1|1|1|1|1|1|1|1|0.9|0.8|0.7|0.6|0.5|0.4|0.3|0.2|0.2|
+|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
+|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
+|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
+|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
+|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
+|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
+|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
+|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
+|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|
 
-$$ A = \begin{bmatrix}
-2 & -1 \\
-3 & 4 
-\end{bmatrix}, \quad B = \begin{bmatrix}
-5 & 2 \\
--1 & 3 
-\end{bmatrix} $$
+8. **Visualizar la imagen**: Una vez que hayas ingresado todos los datos, deberías ver una representación visual de la imagen en escala de grises en tu hoja de cálculo.
 
-Calcula: 
+## Suma de matrices en Google Sheets 
 
-### a) Suma de matrices: \( A + B \)
-$$ A + B = \begin{bmatrix}
-2 + 5 & -1 + 2 \\
-3 + (-1) & 4 + 3
-\end{bmatrix} = \begin{bmatrix}
-7 & 1 \\
-2 & 7
-\end{bmatrix} $$
+Para sumar dos matrices en Google Sheets, se usa la función  `=ARRAYFORMULA()` junto con la operación de suma.
 
-### b) Resta  y  multiplicación de matrices: \(2A - B \)
+De acuerdo a cómo se llame tu hoja de cálculo en donde tienes tu primera matriz, por ejemplo: "Triangulo".
+```
+=ARRAYFORMULA(Triangulo!A1:AD30 + OtraHoja!A1:AD30)
+```
 
-$$ 2A - B = 2 \begin{bmatrix}
-2 & -1 \\
-3 & 4
-\end{bmatrix} - \begin{bmatrix}
-5 & 2 \\    
--1 & 3
-\end{bmatrix} = \begin{bmatrix}
-4 & -2 \\
-6 & 8
-\end{bmatrix} - \begin{bmatrix}
-5 & 2 \\
--1 & 3
-\end{bmatrix} = \begin{bmatrix}
--1 & -4 \\
-7 & 5
-\end{bmatrix} $$
+Se obtendrá la suma de las matrices.
 
-### c) Multiplicación de matrices: \( AB \)
-$$ AB = \begin{bmatrix}
-2 & -1 \\
-3 & 4
-\end{bmatrix} \begin{bmatrix}
-5 & 2 \\
--1 & 3
-\end{bmatrix} = \begin{bmatrix}
-2\cdot5+(-1)\cdot(-1) & 2\cdot2+(-1)\cdot3\\
-3\cdot5+4\cdot(-1)    & 3\cdot2+4\cdot3
-\end{bmatrix} = \begin{bmatrix}
-11 & 1 \\
-11 & 18
-\end{bmatrix} $$
+## Resta de matrices en Google Sheets
 
-### d) Multiplicación de matrices: \( BA \)
-$$ BA = \begin{bmatrix}
-5 & 2 \\
--1 & 3
-\end{bmatrix} \begin{bmatrix}
-2 & -1 \\
-3 & 4
-\end{bmatrix} = \begin{bmatrix}
-(5\cdot2) + (2\cdot3) & (5\cdot-1) + (2\cdot4) \\
-(-1\cdot2) + (3\cdot3) & (-1\cdot-1) + (3\cdot4)
-\end{bmatrix} = \begin{bmatrix}
-16 & 3 \\
-7 & 13
-\end{bmatrix} $$
+Para restar dos matrices en Google Sheets, se usa la función  `=ARRAYFORMULA()` junto con la operación de resta. 
 
-### e) Transpuesta de la matriz A: \( A^T \)
-$$ A^T = \begin{bmatrix}
-2 & 3 \\
--1 & 4
-\end{bmatrix} $$
+De acuerdo a cómo se llame tu hoja de cálculo en donde tienes tu primera matriz, por ejemplo: "Triangulo".
+```
+=ARRAYFORMULA(Triangulo!A1:AD30 - OtraHoja!A1:AD30)
+```
 
----
+Se obtendrá la resta de las matrices.
 
-# Ejercicio 3: Multiplicación cadena
+## Multiplicación Escalar en Google Sheets
 
-## Objetivo del ejercicio:
-Comprobar la propiedad asociativa de la multiplicación de matrices mediante el cálculo de productos en cadena.
+Para multiplicar una matriz por un escalar en Google Sheets, se usa la función  `=ARRAYFORMULA()` junto con la operación de multiplicación. 
 
----
+**Nota**: Elige una celda en donde escribirás el escalar por el que se va a multiplicar. Ejemplo: F33.
 
-*Verificar que* $(AB)C = A(BC)$ 
+```
+=ARRAYFORMULA($F$33 * Triangulo!A1:AD30)
+```
 
-Dadas las matrices:
+Y se obtendrá la mátriz multiplicada por un escalar. 
 
-$$ A = \begin{bmatrix}
-1 & 2 \\
-3 & 4 
-\end{bmatrix}, \quad B = \begin{bmatrix}
-2 & 0 \\
-1 & 3 
-\end{bmatrix}, \quad C = \begin{bmatrix}
-1 & 1 \\
-0 & 2
-\end{bmatrix} $$
+## Transponer una matriz en Google Sheets
 
-### a) Calcular \( (AB)C \)
-$$ AB = \begin{bmatrix}
-1 & 2 \\
-3 & 4
-\end{bmatrix} \begin{bmatrix}
-2 & 0 \\
-1 & 3
-\end{bmatrix} = \begin{bmatrix}
-(1\cdot2) + (2\cdot1) & (1\cdot0) + (2\cdot3) \\
-(3\cdot2) + (4\cdot1) & (3\cdot0) + (4\cdot3)
-\end{bmatrix} = \begin{bmatrix}
-4 & 6 \\
-10 & 12
-\end{bmatrix} $$
-$$ (AB)C = \begin{bmatrix}
-4 & 6 \\
-10 & 12
-\end{bmatrix} \begin{bmatrix}
-1 & 1 \\
-0 & 2
-\end{bmatrix} = \begin{bmatrix}
-(4\cdot1) + (6\cdot0) & (4\cdot1) + (6\cdot2) \\
-(10\cdot1) + (12\cdot0) & (10\cdot1) + (12\cdot2)
-\end{bmatrix} = \begin{bmatrix}
-4 & 16 \\
-10 & 34
-\end{bmatrix} $$
+Para transponer una matriz en Google Sheets, se usa la función `=TRANSPOSE()`. 
 
-### b) Calcular \( A(BC) \)
-$$ BC = \begin{bmatrix}
-2 & 0 \\
-1 & 3
-\end{bmatrix} \begin{bmatrix}
-1 & 1 \\
-0 & 2
-\end{bmatrix} = \begin{bmatrix}
-(2\cdot1) + (0\cdot0) & (2\cdot1) + (0\cdot2) \\
-(1\cdot1) + (3\cdot0) & (1\cdot1) + (3\cdot2)
-\end{bmatrix} = \begin{bmatrix}
-2 & 2 \\
-1 & 7
-\end{bmatrix} $$
-$$ A(BC) = \begin{bmatrix}
-1 & 2 \\
-3 & 4
-\end{bmatrix} \begin{bmatrix}
-2 & 2 \\
-1 & 7
-\end{bmatrix} = \begin{bmatrix}
-(1\cdot2) + (2\cdot1) & (1\cdot2) + (2\cdot7) \\
-(3\cdot2) + (4\cdot1) & (3\cdot2) + (4\cdot7)
-\end{bmatrix} = \begin{bmatrix}
-4 & 16 \\
-10 & 34
-\end{bmatrix} $$
+De acuerdo a como se llame tu hoja de cálculo en donde tienes tu primera matriz, por ejemplo: "Triangulo".
 
-*Conclusión*: Por lo tanto, se verifica que $(AB)C = A(BC)$.
+```
+=TRANSPONSE(Triangulo!A1:AD30)
+```
+
+Y se obtendrá la matriz transpuesta.
+
+## Invertir una matriz en Google Sheets
+
+Para invertir una matriz en Google Sheets, se usa la función `=ARRAYFORMULA()`. Se va a restar a 1 la hoja de cálculo en donde se tiene la matriz, ejemplo: "Triangulo".
+
+```
+=ARRAYFORMULA(1-Triangulo!A1:AD30)
+```
+
+Y se obtendrá la imagen invertida.
 

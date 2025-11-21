@@ -192,3 +192,4 @@ Para invertir una matriz en Google Sheets, se usa la función `=ARRAYFORMULA()`.
 
 Y se obtendrá la imagen invertida.
 
+---

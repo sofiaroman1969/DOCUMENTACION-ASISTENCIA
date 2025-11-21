@@ -90,7 +90,7 @@ plt.show()
 
 5. **Cambiar el formato de las celdas**: 
 ```
-Seleccionar columna A hasta la columna AD (30 columnas). --> Cambiar tamaño el tamaño de las columnas a 20. --> Seleccionar fila 1 hasta la fila 30 (30 filas). --> Cambiar el tamaño de las filas a 20.
+Seleccionar columna A hasta la columna AD (30 columnas). --> Cambiar el tamaño de las columnas a 20. --> Seleccionar fila 1 hasta la fila 30 (30 filas). --> Cambiar el tamaño de las filas a 20.
 ```
 
 6. **Aplicar formato condicional**: 

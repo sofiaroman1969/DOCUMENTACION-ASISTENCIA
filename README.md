@@ -182,15 +182,15 @@ De acuerdo a como se llame tu hoja de cálculo en donde tienes tu primera matriz
 
 Y se obtendrá la matriz transpuesta.
 
-## Invertir una matriz en Google Sheets
+## Suma de escalares
 
-Para invertir una matriz en Google Sheets, se usa la función `=ARRAYFORMULA()`. Se va a restar a 1 la hoja de cálculo en donde se tiene la matriz, ejemplo: "Triangulo".
+Para sumar dos matrices escalares, se usa la función `=ARRAYFORMULA()`. Se va a sumar a 1 la hoja de cálculo en donde se tiene la matriz multiplicada por el escalar con otra, ejemplo: "Multiplicación Escalar Triangulo" y "Multiplicación Escalar Raton".
 
 ```
-=ARRAYFORMULA(1-Triangulo!A1:AD30)
+=ARRAYFORMULA('Multiplicación Escalar Triangulo'!A1:AD30 +'Multiplicación Escalar Raton'!A1:AD30)
 ```
 
-Y se obtendrá la imagen invertida.
+Y se obtendrá la suma de ambas escalares.
 
 ## Hoja de dibujo
 

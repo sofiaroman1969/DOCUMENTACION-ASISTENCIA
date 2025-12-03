@@ -1,6 +1,6 @@
 # Tecnológico de Software
 ## Materia: Fundamentos de álgebra
-## Alumno: Michelle Cámara González
+## Alumno: Sofia Roman
 ## Actividad #16.  Matrices documentación
 
 ---
